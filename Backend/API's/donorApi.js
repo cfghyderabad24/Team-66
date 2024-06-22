@@ -1,9 +1,9 @@
 const express = require("express");
+const payment  = require('../Controllers/donorController.js');
+
 const donorApp = express.Router();
 
-import { payment } from '../Controllers/donorController.js';
 
-
-donorApp.post('/payment',payment);
+donorApp.post('/payment', payment);
 
 module.exports = donorApp;

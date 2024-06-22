@@ -63,10 +63,12 @@ volunteerApi.post("/login", (req, res) => {
 });
 
 volunteerApi.get("/:id", (req, res) => {
-  const id = req.params.id;
+  const email = req.params.id;
   volunteerModel
-    .findById(id)
-    .then((volunteer) => {
+    .findOne({email:email})
+    .then((user) => {
+    let volunteer = user.toObject()
+      delete volunteer.password
       res.send({
         message: "Volunteer found",
         success: true,
