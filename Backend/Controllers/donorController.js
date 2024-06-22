@@ -13,7 +13,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const payment = async (req,res) => {
 
-    const frontend_url = '';
+    const frontend_url = 'http://localhost:5173';
 
     try{
         const newDonor = new donorModel({
@@ -39,8 +39,8 @@ const payment = async (req,res) => {
     const session = await stripe.checkout.sessions.create({
         line_items:line_items,
         mode:'payment',
-        success_url:`${frontend_url}/verify?success=true&paymentId=${newOrder._id}`,
-        cancel_url:`${frontend_url}/verify?success=false&paymentId=${newOrder._id}`,
+        success_url:`${frontend_url}/verify?success=true&paymentId=${newDonor._id}`,
+        cancel_url:`${frontend_url}/verify?success=false&paymentId=${newDonor._id}`,
     })
     
 
