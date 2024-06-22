@@ -75,7 +75,31 @@ adminApp.post("/verify_volunteer",(req,res)=>{
     })
 })
 
-
+adminApp.post('/addSTOV',async(req,res)=>{
+    const {sid,vid} = req.body;
+    await volunteerModel.findOne({email:vid})
+    .then((volunteer)=>{
+        if(volunteer){
+            volunteer.studentIds.push(sid);
+            volunteer.save();
+            res.send({
+                message:"Student added to volunteer",
+                success:true,
+            })
+        }else{
+            res.send({
+                message:"Volunteer not found",
+                success:false,
+            })
+        }
+    })
+    .catch((err)=>{
+        res.send({
+            message:err.message,
+            success:false,
+        })
+    })
+})
 
 
 module.exports = adminApp;

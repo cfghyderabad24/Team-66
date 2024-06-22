@@ -22,10 +22,11 @@ function AdminHome() {
             }
         })
     }
-  return (
+  return (<>
   <div>
     
         <div>AdminHome</div>
+        <h2>Volunteers to be verified</h2>
         {
           volunteers.map((volunteer,index)=>{
             return(
@@ -39,6 +40,7 @@ function AdminHome() {
           })
         }
         </div>
+        </>
   )
 }
 
