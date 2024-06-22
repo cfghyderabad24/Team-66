@@ -1,13 +1,13 @@
 const express = require("express");
 const parentApp = express.Router();
-const student = require('../models/studentModel.js');
+const studentModel = require('../Models/studentModel.js');
 
 
-parentApp.get('/login/:username/:uuid', (req, res) => {
+parentApp.get('/login/:username/:uuid', async (req, res) => {
 
     //verify the uuid in student db
     let { username, uuid } = req.params;
-    const st= student.findOne({username: username});
+    const st = await studentModel.findOne({name: username});
     if(st.uuid === uuid) 
     res.send({
         message: "login success",
@@ -21,9 +21,9 @@ parentApp.get('/login/:username/:uuid', (req, res) => {
     }
 });
 
-parentApp.get('/:username', (req, res) => {
+parentApp.get('/:username', async (req, res) => {
     let { username } = req.params;
-    const st= student.findOne({username: username});
+    const st= await studentModel.findOne({username: username});
     res.send({
         message : "student details",
         student : st

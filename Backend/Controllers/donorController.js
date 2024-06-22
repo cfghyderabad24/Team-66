@@ -1,7 +1,7 @@
-import donorModel from "../Models/donorModel.js"
+const donorModel = require('../Models/donorModel');
 
 
-import  { Stripe } from 'stripe';
+const Stripe = require('stripe');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -35,8 +35,8 @@ const payment = async (req,res) => {
     const session = await stripe.checkout.sessions.create({
         line_items:line_items,
         mode:'payment',
-        success_url:`${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
-        cancel_url:`${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
+        success_url:`${frontend_url}/verify?success=true&orderId=${newDonor._id}`,
+        cancel_url:`${frontend_url}/verify?success=false&orderId=${newDonor._id}`,
     })
 
     res.json({success:true,session_url:session.url});
@@ -47,4 +47,4 @@ const payment = async (req,res) => {
     }
 }
 
-export {payment};
+module.exports = payment;
