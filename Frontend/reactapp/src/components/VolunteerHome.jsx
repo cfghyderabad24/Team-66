@@ -26,7 +26,6 @@ function VolunteerHome() {
         setFormData({
             username: ''
         });
-        console.log(qr)
     })
   };
   return (<>

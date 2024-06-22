@@ -190,7 +190,7 @@ volunteerApi.post("/user-login", async (req, res) => {
     let username = req.body.username;
     let uniqueId = uuidv4();
     const st = await studentModel.findOne({ name: username });
-    st.uuid = uuidv4();
+    st.uuid = uniqueId;
     await st.save();
     res.send({
       message: "uuid creation success",

@@ -25,7 +25,7 @@ const router= createBrowserRouter(
      <Route path='/adminlogin' element={<Adminlogin/>}/>
      <Route path='/admin/dashboard' element={<AdminHome/>}/>
      <Route path='/volunteerregister' element={<Volunteerregister/>}/>
-     <Route path='/parent/:id' element={<ParentHome/>} />
+     <Route path='/parent/:id/:uuid' element={<ParentHome/>} />
      <Route path="*" element={<div>not found</div>}/>
     </Route>
   )
