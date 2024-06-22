@@ -1,7 +1,7 @@
 const express = require("express");
 const volunteerApi = express.Router();
-const student = require("../models/studentModel.js");
-const volunteerModel = require("../models/volunteerModel.js");
+const student = require("../Models/studentModel.js");
+const volunteerModel = require("../Models/volunteerModel.js");
 const { uuid } = require("uuid");
 
 volunteerApi.post("/register", (req, res) => {
