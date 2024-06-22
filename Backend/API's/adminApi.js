@@ -1,12 +1,12 @@
 const express = require("express");
 const adminApp = express.Router();
 
-const adminmodel = require("../Models/adminModel");
+const adminModel = require("../Models/adminModel");
 const volunteerModel = require("../Models/volunteerModel");
 
 adminApp.post("/login",(req,res)=>{
     const {username, password} = req.body;
-    adminmodel.findOne({username:username})
+    adminModel.findOne({username:username})
     .then((admin)=>{
         if(admin){
           if(admin.password === password){

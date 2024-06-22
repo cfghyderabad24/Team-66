@@ -1,10 +1,10 @@
 const express = require("express");
 const volunteerApi = express.Router();
-const student = require("../Models/studentModel.js");
+const studentModel = require("../Models/studentModel.js");
 const volunteerModel = require("../Models/volunteerModel.js");
-const { uuid } = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 
-volunteerApi.post("/register", (req, res) => {
+volunteerApi.post("/register",async (req, res) => {
   const { name, age, profession, mobileNo, email, password } = req.body;
   const newVolunteer = new volunteerModel({
     name,
@@ -14,7 +14,7 @@ volunteerApi.post("/register", (req, res) => {
     email,
     password,
   });
-  newVolunteer
+  await newVolunteer
     .save()
     .then(() => {
       res.send({
@@ -30,9 +30,9 @@ volunteerApi.post("/register", (req, res) => {
     });
 });
 
-volunteerApi.post("/login", (req, res) => {
+volunteerApi.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  volunteerModel
+  await volunteerModel
     .findOne({ email: email })
     .then((volunteer) => {
       if (volunteer) {
@@ -62,9 +62,9 @@ volunteerApi.post("/login", (req, res) => {
     });
 });
 
-volunteerApi.get("/:id", (req, res) => {
+volunteerApi.get("/:id",async (req, res) => {
   const email = req.params.id;
-  volunteerModel
+  await volunteerModel
     .findOne({email:email})
     .then((user) => {
     let volunteer = user.toObject()
@@ -83,7 +83,7 @@ volunteerApi.get("/:id", (req, res) => {
     });
 });
 
-volunteerApi.post("/:id/add-student", (req, res) => {
+volunteerApi.post("/:id/add-student", async (req, res) => {
   const id = req.params.id;
   const {
     name,
@@ -95,22 +95,38 @@ volunteerApi.post("/:id/add-student", (req, res) => {
     uuid,
   } = req.body;
 
-  const newStudent = new student({
-    name,
-    age,
-    medicalDetails,
-    parentName,
-    parentContact,
-    parentEmail,
-    uuid,
-  });
-  newStudent
-    .save()
-    .then(() => {
-      res.send({
-        message: "Student added successfully",
-        success: true,
-      });
+  await volunteerModel.findOne({ email: id })
+    .then(async (volunteer) => {
+      if (volunteer && volunteer.verified) {
+        const newStudent = new studentModel({
+          name,
+          age,
+          medicalDetails,
+          parentName,
+          parentContact,
+          parentEmail,
+          uuid,
+        });
+       await newStudent
+          .save()
+          .then(() => {
+            res.send({
+              message: "Student added successfully",
+              success: true,
+            });
+          })
+          .catch((err) => {
+            res.send({
+              message: err.message,
+              success: false,
+            });
+          });
+      } else {
+        res.send({
+          message: "Volunteer not found or not verified",
+          success: false,
+        });
+      }
     })
     .catch((err) => {
       res.send({
@@ -120,46 +136,64 @@ volunteerApi.post("/:id/add-student", (req, res) => {
     });
 });
 
-volunteerApi.post('/:id/:sid/report',(req,res)=>{
+volunteerApi.post('/:id/:sid/report',async (req,res)=>{
     const id = req.params.id;
     const sid = req.params.sid;
-    const {report} = req.body;
+    const { report } = req.body;
     const re = {
-        date : new Date(),
-        comment : report
-    }
-    student.findById(sid)
-    .then((student)=>{
-        student.reports.push(re);
-        student.save()
-        .then(()=>{
-            res.send({
-                message:"Comment added successfully",
-                success:true
+      date: new Date(),
+      comment: report,
+    };
+
+    await volunteerModel.findOne({ email: id, verified: true })
+      .then(async (volunteer) => {
+        if (volunteer) {
+          await studentModel.findOne({name: sid})
+            .then((student) => {
+              student.reports.push(re);
+              student.save()
+                .then(() => {
+                  res.send({
+                    message: "Comment added successfully",
+                    success: true,
+                  });
+                })
+                .catch((err) => {
+                  res.send({
+                    message: err.message,
+                    success: false,
+                  });
+                });
             })
-        }).catch((err)=>{
-            res.send({
-                message:err.message,
-                success:false
-            })
-        })
-    })
-    .catch((err)=>{
+            .catch((err) => {
+              res.send({
+                message: err.message,
+                success: false,
+              });
+            });
+        } else {
+          res.send({
+            message: "Volunteer not found or not verified",
+            success: false,
+          });
+        }
+      })
+      .catch((err) => {
         res.send({
-            message:err.message,
-            success:false
-        })
-    })
+          message: err.message,
+          success: false,
+        });
+      });
 })
 
-volunteerApi.post("/user-login", (req, res) => {
+volunteerApi.post("/user-login", async (req, res) => {
     let username = req.body.username;
-    let uniqueId = uuid();
-    const st = student.findOne({ username: username });
-    st.uuid = uniqueId;
-    st.save();
+    let uniqueId = uuidv4();
+    const st = await studentModel.findOne({ name: username });
+    st.uuid = uuidv4();
+    await st.save();
     res.send({
-      message: "login success",
+      message: "uuid creation success",
       success: true,
       uuid: uniqueId,
     });
