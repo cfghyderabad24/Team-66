@@ -198,5 +198,62 @@ volunteerApi.post("/user-login", async (req, res) => {
     });
   });
 
+
+volunteerApi.get('/certificate/:id',async (req, res) => {
+  const name = req.params.id;
+
+  try {
+      const canvas = createCanvas(800, 600); // Adjust size as per your template
+      const ctx = canvas.getContext('2d');
+      const template = await loadImage(path.join(__dirname, 'certificate.png'));
+
+      // Load the template onto the canvas
+      ctx.drawImage(template, 0, 0, canvas.width, canvas.height);
+
+      // Set the font
+      ctx.font = '40px Arial';
+
+      // Set text color
+      ctx.fillStyle = '#A28535';
+
+      // Define text positions
+      const namePosition = { x: 300, y: 300 }; // Adjust based on your template
+
+      // Draw the text onto the canvas
+      ctx.fillText(name, namePosition.x, namePosition.y);
+
+      // Convert the canvas to a PNG buffer
+      const buffer = canvas.toBuffer('image/png');
+
+      // Create a PDF document
+      const doc = new PDFDocument({ size: [canvas.width, canvas.height] });
+
+      // Embed the PNG image into the PDF
+      doc.image(buffer, 0, 0, { width: canvas.width, height: canvas.height });
+
+      // Create a buffer to store the PDF data
+      const pdfBuffer = [];
+
+      // Capture the data chunks as the PDF is generated
+      doc.on('data', chunk => pdfBuffer.push(chunk));
+      
+      // End the PDF document and send the response
+      doc.on('end', () => {
+          const finalBuffer = Buffer.concat(pdfBuffer);
+
+          // Set headers and send the PDF as a response
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', 'attachment; filename="certificate.pdf"');
+          res.send(finalBuffer);
+      });
+
+      doc.end();
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error generating certificate.');
+  }
+}
+);
+
   
 module.exports = volunteerApi;
