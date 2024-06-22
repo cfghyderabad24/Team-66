@@ -23,7 +23,7 @@ const payment = async (req,res) => {
             password:req.body.password,
         })
 
-        await newDonor.save();
+        const saveDonor = await newDonor.save();
 
         const line_items = [{
             price_data: {
@@ -36,13 +36,13 @@ const payment = async (req,res) => {
             quantity: 1,
         }];
 
+
     const session = await stripe.checkout.sessions.create({
         line_items:line_items,
         mode:'payment',
-        success_url:`${frontend_url}/verify?success=true&paymentId=${newDonor._id}`,
-        cancel_url:`${frontend_url}/verify?success=false&paymentId=${newDonor._id}`,
+        success_url:`${frontend_url}/verify?success=true&paymentId=${saveDonor._id}`,
+        cancel_url:`${frontend_url}/verify?success=false&paymentId=${saveDonor._id}`,
     })
-    
 
     res.json({success:true,session_url:session.url});
     }
