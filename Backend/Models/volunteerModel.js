@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const volunteerSchema = new mongoose.Schema({
     name:{
@@ -45,4 +45,4 @@ const volunteerSchema = new mongoose.Schema({
 
 const volunteerModel = mongoose.models.order || mongoose.model("volunteer",volunteerSchema);
 
-export default volunteerModel;
+module.exports = volunteerModel;

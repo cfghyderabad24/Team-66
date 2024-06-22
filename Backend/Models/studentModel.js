@@ -15,12 +15,15 @@ const studentSchema = new Schema({
     parentName: { type: String, required: true },
     parentContact: { type: Number, required: true },
     parentEmail: { type: String, required: false },
-    report: [
-        {
-            date: { type: Date, required: true },
-            comment: { type: String, required: true },
-        },
-    ],
+    reports: {
+        type: [
+            {
+                date: { type: Date, required: true },
+                comment: { type: String, required: true },
+            }
+        ],
+        default: []
+    },
     uuid: { type: String, required: false },
 });
 
