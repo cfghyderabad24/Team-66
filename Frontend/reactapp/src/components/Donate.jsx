@@ -29,7 +29,7 @@ const Donate = () => {
         password:data.password,
       }
 
-      let response = await axios.post('/donor/payment',paymentData);
+      let response = await axios.post('http://localhost:3000/donor/payment',paymentData);
       if(response.data.success){
         const {session_url} = response.data;
         window.location.replace(session_url);
@@ -46,7 +46,7 @@ const Donate = () => {
             <div>
               <div>
                 <label>Name: </label>
-                <input name='name' onChange={onChangeHandler} value={data.firstName} type="text" placeholder='First name' />
+                <input name='name' onChange={onChangeHandler} value={data.firstName} type="text" placeholder='Name' />
               </div>
               <div>
                 <label> Email: </label>
@@ -54,13 +54,14 @@ const Donate = () => {
               </div>
               <div>
                 <label>Password: </label>
-                <input name='password' onChange={onChangeHandler} value={data.street} type="text" placeholder='Street' />
+                <input name='password' onChange={onChangeHandler} value={data.street} type="text" placeholder='Password' />
               </div>
               <div>
                 <label>Amount: </label>
-                <input name='amount' onChange={onChangeHandler} value={data.phone} type="text" placeholder='Phone' />
+                <input name='amount' onChange={onChangeHandler} value={data.phone} type="text" placeholder='Amount' />
               </div>
               </div>
+              <button type='submit'>Submit</button>
           </form>
         </div>
   )

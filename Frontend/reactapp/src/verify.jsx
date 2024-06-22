@@ -12,15 +12,15 @@ const Verify = () => {
 
   const verifyPayment = async () => {
     try {
-      const response = await axios.post('/donor/verify', { success, paymentId });
+      const response = await axios.post('http://localhost:3000/donor/verify', { success, paymentId });
       if (response.data.success) {
         await getCertificate();
       } else {
-        navigate('/');
+        navigate('http://localhost:3000/donor/verify');
       }
     } catch (error) {
       console.error('Error verifying payment:', error);
-      navigate('/');
+      navigate('http://localhost:3000/donor/verify');
     } finally {
       setLoading(false);
     }
@@ -28,7 +28,7 @@ const Verify = () => {
 
   const getCertificate = async () => {
     try {
-      const response = await axios.get('/donor/certificate', {
+      const response = await axios.get('http://localhost:3000/donor/certificate', {
         responseType: 'blob'
       });
       const url = URL.createObjectURL(response.data);
