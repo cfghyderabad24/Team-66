@@ -10,7 +10,6 @@ function VolunteerHome() {
     const [formData, setFormData] = useState({
         username: ''
       });
-      
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,6 +31,7 @@ function VolunteerHome() {
     <div>VolunteerHome</div>
     {qr === '' ? (<form onSubmit={handleSubmit}>
         <div>
+          <h2>Get QR of a student   </h2>
           <div>
             <label>Username: </label>
             <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder='Enter your username' required />
@@ -39,6 +39,13 @@ function VolunteerHome() {
           <button type="submit" className='my-5'>Submit</button>
         </div>
       </form>):(<QRCode value={`http://localhost:5173/parent/${qr}`} />)}
+
+      <div>
+        <h2>Register a student</h2>
+        <form>
+
+        </form>
+      </div>
     </>
   )
 }
