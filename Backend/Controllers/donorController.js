@@ -35,9 +35,10 @@ const payment = async (req,res) => {
     const session = await stripe.checkout.sessions.create({
         line_items:line_items,
         mode:'payment',
-        success_url:`${frontend_url}/verify?success=true&orderId=${newDonor._id}`,
-        cancel_url:`${frontend_url}/verify?success=false&orderId=${newDonor._id}`,
+        success_url:`${frontend_url}/verify?success=true&paymentId=${newOrder._id}`,
+        cancel_url:`${frontend_url}/verify?success=false&paymentId=${newOrder._id}`,
     })
+    
 
     res.json({success:true,session_url:session.url});
     }
@@ -47,4 +48,25 @@ const payment = async (req,res) => {
     }
 }
 
-module.exports = payment;
+const verifyPayment = async (req,res) => {
+    const {paymentId,success} = req.body;
+    try{
+        if(success=="true"){
+            res.json({success:true,message:"Paid"})
+        }
+        else{
+            await donorModel.findByIdAndDelete(paymentId);
+            res.json({success:false,message:"Payment Failed"})
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+module.exports = {
+    payment: payment,
+    verifyPayment : verifyPayment,
+}
+
+
