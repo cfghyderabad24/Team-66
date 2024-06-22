@@ -1,7 +1,7 @@
-import donorModel from "../Models/donorModel.js"
+const donorModel = require('../Models/donorModel');
 
 
-import  { Stripe } from 'stripe';
+const Stripe = require('stripe');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 

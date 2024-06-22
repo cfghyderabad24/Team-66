@@ -7,14 +7,18 @@ import Home from './components/Home.jsx'
 import Layout from './layout.jsx'
 import Announcements from './components/Announcements.jsx'
 import Donate from './components/Donate.jsx'
-import Login from './components/login.jsx'
+import Volunteerlogin from './components/Volunteerlogin.jsx'
+import Adminlogin from './components/Adminlogin.jsx'
+import Volunteerregister from './components/volunteerregister.jsx'
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout/>} >
      <Route path='/' element={<Home/>}/>
      <Route path='/announcements' element={<Announcements/>}/>
      <Route path='/donate' element={<Donate/>}/>
-     <Route path='/login' element={<Login/>}/>
+     <Route path='volunteerlogin' element={<Volunteerlogin/>}/>
+     <Route path='adminlogin' element={<Adminlogin/>}/>
+     <Route path='/volunteerregister' element={<Volunteerregister/>}/>
      <Route path="*" element={<div>not found</div>}/>
     </Route>
   )
