@@ -36,7 +36,7 @@ const payment = async (req,res) => {
             quantity: 1,
         }];
 
-
+    
     const session = await stripe.checkout.sessions.create({
         line_items:line_items,
         mode:'payment',
@@ -45,13 +45,13 @@ const payment = async (req,res) => {
     })
 
     res.json({success:true,session_url:session.url});
+    console.log()
     }
     catch(error){
         console.log(error);
         res.json({success:false,message:"Error"});
     }
 }
-
 
 
 const verifyPayment = async (req,res) => {

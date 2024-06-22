@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import QRCode from "react-qr-code";
 
 function VolunteerHome() {
   const { id } = useParams();
   const [volunteer, setVolunteer] = useState([]);
+  const [certificate,setCertificate] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(`http://localhost:3000/volunteer/${id}`).then((response) => {
       console.log("Students under this volunteer:", response.data);
@@ -32,6 +35,19 @@ function VolunteerHome() {
     parentEmail: "",
     uuid: "",
   });
+
+  const getCertificate = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/volunteer/certificate/${volunteer.name}`, {
+        responseType: 'blob'
+      });
+      const url = URL.createObjectURL(response.data);
+      setCertificateUrl(url);
+    } catch (error) {
+      console.error('Error fetching certificate:', error);
+    }
+  };
+
   const handleStudentDetails = (e) => {
     if (
       e.target.name === "bloodGroup" ||
@@ -95,6 +111,12 @@ function VolunteerHome() {
         });
       });
   };
+
+  const onHandler = () => {
+    setCertificate(true);
+    getCertificate();
+  }
+
   const [query, setQuery] = useState("");
   const handleQueryChange = (e) => {
     setQuery(e.target.value);
@@ -264,6 +286,14 @@ function VolunteerHome() {
                 <input type="text" value={query} onChange={handleQueryChange} />
                 <button type="submit">add query</button>
               </form>
+              <button onClick={onHandler}></button>
+
+              {  certificateUrl && (
+          <div>
+            <iframe src={certificateUrl} width="800" height="600" title="Certificate"></iframe>
+          </div>
+        )}
+              
             </div>
           ))}
       </div>
