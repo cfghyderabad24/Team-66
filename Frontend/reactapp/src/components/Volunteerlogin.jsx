@@ -22,11 +22,11 @@ function Volunteerlogin() {
       await axios.post('http://localhost:3000/volunteer/login', formData)
       .then((response)=>{
         console.log('Login successful:', response.data);
+        navigate(`/volunteer/home/${formData.email}`)
         setFormData({
           email: '',
           password: '',
         });
-        navigate('/volunteer/home')
       })
     } catch (error) {
       console.error('Error logging in:', error);

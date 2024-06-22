@@ -21,7 +21,7 @@ const router= createBrowserRouter(
      <Route path='/announcements' element={<Announcements/>}/>
      <Route path='/donate' element={<Donate/>}/>
      <Route path='/volunteerlogin' element={<Volunteerlogin/>}/>
-    <Route path='/volunteer/home' element={<VolunteerHome/>}/>
+    <Route path='/volunteer/home/:id' element={<VolunteerHome/>}/>
      <Route path='/adminlogin' element={<Adminlogin/>}/>
      <Route path='/admin/dashboard' element={<AdminHome/>}/>
      <Route path='/volunteerregister' element={<Volunteerregister/>}/>
