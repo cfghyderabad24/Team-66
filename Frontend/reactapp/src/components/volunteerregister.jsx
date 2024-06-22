@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Don't forget to import axios
+import { useNavigate } from 'react-router-dom';
 
 function Volunteerregister() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -21,8 +23,11 @@ function Volunteerregister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/volunteerregister', formData);
-      console.log('Registration successful:', response.data);
+      await axios.post('http://localhost:3000/volunteer/register', formData)
+      .then((response)=>{
+      if(response.data.success) {
+        navigate('/volunteer/home');
+      }
       setFormData({
         name: '',
         age: '',
@@ -31,6 +36,7 @@ function Volunteerregister() {
         email: '',
         password: '',
       });
+    })
     } catch (error) {
       console.error('Error submitting registration:', error);
     }
