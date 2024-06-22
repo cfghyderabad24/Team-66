@@ -1,0 +1,331 @@
+#header {
+    display : flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: #E3E6F3;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);/*shadow below the 1st box*/
+    z-index: 999; /*for showing the shadow if it's gone*/
+    position: sticky;/*for the navbar to stay rigid even when scrolling*/
+    top: 0;
+    left: 0;
+}
+/*for alligning home,shop,etc in one row and not in column wise*/
+#navbar {
+    display : flex;
+    align-items: center;
+    justify-content: center;
+}
+#navbar li {
+    list-style: none; /*for removing bullet points*/
+    padding: 0 20px;/*spaces between home, shop,etc */
+    position: relative;/*for the underline blow home,etc to be at correct position*/
+}
+#navbar li a {
+    text-decoration: none; /*for removing underlines*/
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;/*text color*/
+    transition: 0.3s ease; /*transition from black to green to be smooth*/
+}
+/* for color changing when we move mouse over(black to green) */
+#navbar li a:hover,
+#navbar li a.active {
+    color: #088178
+}
+/* for underlining effect when we move mouse over */
+#navbar li a.active::after,
+#navbar li a:hover::after { /*for the underline to be shown below shop,etc as we hover*/
+    content: "";
+    width: 30%;
+    height: 2px;
+    background: #088178;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+#navbar .abc {
+    width: 10px;
+    height: 10px;
+}
+#home .bcd {
+    padding: 50px 80px;
+    width: 89%;
+    height: 20%;
+}
+#home .centered {
+    position: absolute;
+    bottom: -120px;
+    right: 16px;
+    left: 34px;
+    color: #fff;
+    font-size: 80px;
+    text-align: center;
+    font-family: 'Spartan', sans-serif;
+    font-style: italic;
+}
+#pic {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 40px;
+}
+#pic .mission{
+    width: 700px;
+    height: 250px;
+    background: #fddde4;
+    text-align: center;
+    justify-content: center;
+    padding: 20px 100px; 
+    font-size: 20px;
+    box-shadow:10px 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+#pic .work{
+    width: 700px;
+    height: 250px;
+    background: #cce7d0;
+    text-align: center;
+    justify-content: center;
+    padding: 20px 100px; 
+    font-size: 20px;
+    box-shadow:10px 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+#about .ab {
+    padding: 50px 80px;
+    font-size: 25px;
+    background: #ffdfd3;
+    border-radius: 30px;
+}
+#about {
+    padding: 20px;
+    box-shadow:10px 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+#us .img {
+    width: 600px;
+    height: 500px;
+    padding: 20px;
+}
+#us {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+#us .text {
+    text-align: center;
+    font-size: 25px;
+    padding: 200px 80px;
+}
+#us .text .nmg {
+    color: #f56579;
+}
+#founder {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+    background: #000;
+    color: #fff;
+    border-radius: 60px;
+    height: 250px; 
+}
+#founder .founder {
+    padding: 40px 200px;
+    font-size: 20px;
+}
+#founder .ig {
+    width: 250px;
+    height: 250px;
+}
+#b1 .b4{
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background: #ffcbcb;
+}
+#b1 .b4 .i {
+    width: 500px;
+    height: 200px;
+}
+#b1 .b4 .a {
+    font-size: 25px;
+}
+.head{
+    font-size: 40px;
+    padding: 90px 30px 0px 0px;
+    text-align: center;
+    color: #6f147b;
+}
+#b1 .b4 span {
+    color: #e73841;
+}
+#b2 .b5 .j {
+    width: 300px;
+    height: 300px;
+}
+#b2 .b5{
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background: #f1f7b5;
+}
+#b2 .b5 .b {
+    font-size: 25px;
+}
+#b2 .b5 span {
+    color: #e73841;
+}
+#b3 .b6 .k {
+    width: 900px;
+    height: 300px;
+}
+#b3 .b6{
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background: #dfebeb;
+
+}
+#b3 .b6 .c {
+    font-size: 25px;
+}
+#b3 .b6 span {
+    color: #f5686f;
+}
+#b1 {
+    clip-path: polygon(100% 100%, 0% 100%, 0% 6.2%, 1.33% 5.74%, 2.67% 5.28%, 4% 4.82%, 5.33% 4.37%, 6.67% 3.92%, 8% 3.49%, 9.33% 3.07%, 10.67% 2.67%, 12% 2.29%, 13.33% 1.94%, 14.67% 1.61%, 16% 1.32%, 17.33% 1.06%, 18.67% .84%, 20% .66%, 21.33% .52%, 22.67% .41%, 24% .35%, 25.33% .33%, 26.67% .36%, 28% .42%, 29.33% .53%, 30.67% .68%, 32% .87%, 33.33% 1.09%, 34.67% 1.35%, 36% 1.65%, 37.33% 1.98%, 38.67% 2.33%, 40% 2.71%, 41.33% 3.12%, 42.67% 3.54%, 44% 3.98%, 45.33% 4.42%, 46.67% 4.88%, 48% 5.34%, 49.33% 5.8%, 50.67% 6.26%, 52% 6.7%, 53.33% 7.14%, 54.67% 7.56%, 56% 7.97%, 57.33% 8.35%, 58.67% 8.7%, 60% 9.03%, 61.33% 9.32%, 62.67% 9.58%, 64% 9.81%, 65.33% 9.99%, 66.67% 10.14%, 68% 10.25%, 69.33% 10.31%, 70.67% 10.33%, 72% 10.31%, 73.33% 10.25%, 74.67% 10.15%, 76% 10%, 77.33% 9.82%, 78.67% 9.6%, 80% 9.34%, 81.33% 9.04%, 82.67% 8.72%, 84% 8.37%, 85.33% 7.99%, 86.67% 7.59%, 88% 7.17%, 89.33% 6.73%, 90.67% 6.28%, 92% 5.83%, 93.33% 5.37%, 94.67% 4.91%, 96% 4.45%, 97.33% 4%, 98.67% 3.56%, 100% 3.14%);
+}
+#b2 {
+    clip-path: polygon(100% 100%, 0% 100%, 0% 6.2%, 1.33% 5.74%, 2.67% 5.28%, 4% 4.82%, 5.33% 4.37%, 6.67% 3.92%, 8% 3.49%, 9.33% 3.07%, 10.67% 2.67%, 12% 2.29%, 13.33% 1.94%, 14.67% 1.61%, 16% 1.32%, 17.33% 1.06%, 18.67% .84%, 20% .66%, 21.33% .52%, 22.67% .41%, 24% .35%, 25.33% .33%, 26.67% .36%, 28% .42%, 29.33% .53%, 30.67% .68%, 32% .87%, 33.33% 1.09%, 34.67% 1.35%, 36% 1.65%, 37.33% 1.98%, 38.67% 2.33%, 40% 2.71%, 41.33% 3.12%, 42.67% 3.54%, 44% 3.98%, 45.33% 4.42%, 46.67% 4.88%, 48% 5.34%, 49.33% 5.8%, 50.67% 6.26%, 52% 6.7%, 53.33% 7.14%, 54.67% 7.56%, 56% 7.97%, 57.33% 8.35%, 58.67% 8.7%, 60% 9.03%, 61.33% 9.32%, 62.67% 9.58%, 64% 9.81%, 65.33% 9.99%, 66.67% 10.14%, 68% 10.25%, 69.33% 10.31%, 70.67% 10.33%, 72% 10.31%, 73.33% 10.25%, 74.67% 10.15%, 76% 10%, 77.33% 9.82%, 78.67% 9.6%, 80% 9.34%, 81.33% 9.04%, 82.67% 8.72%, 84% 8.37%, 85.33% 7.99%, 86.67% 7.59%, 88% 7.17%, 89.33% 6.73%, 90.67% 6.28%, 92% 5.83%, 93.33% 5.37%, 94.67% 4.91%, 96% 4.45%, 97.33% 4%, 98.67% 3.56%, 100% 3.14%);
+
+}
+#b3 {
+    clip-path: polygon(100% 100%, 0% 100%, 0% 6.2%, 1.33% 5.74%, 2.67% 5.28%, 4% 4.82%, 5.33% 4.37%, 6.67% 3.92%, 8% 3.49%, 9.33% 3.07%, 10.67% 2.67%, 12% 2.29%, 13.33% 1.94%, 14.67% 1.61%, 16% 1.32%, 17.33% 1.06%, 18.67% .84%, 20% .66%, 21.33% .52%, 22.67% .41%, 24% .35%, 25.33% .33%, 26.67% .36%, 28% .42%, 29.33% .53%, 30.67% .68%, 32% .87%, 33.33% 1.09%, 34.67% 1.35%, 36% 1.65%, 37.33% 1.98%, 38.67% 2.33%, 40% 2.71%, 41.33% 3.12%, 42.67% 3.54%, 44% 3.98%, 45.33% 4.42%, 46.67% 4.88%, 48% 5.34%, 49.33% 5.8%, 50.67% 6.26%, 52% 6.7%, 53.33% 7.14%, 54.67% 7.56%, 56% 7.97%, 57.33% 8.35%, 58.67% 8.7%, 60% 9.03%, 61.33% 9.32%, 62.67% 9.58%, 64% 9.81%, 65.33% 9.99%, 66.67% 10.14%, 68% 10.25%, 69.33% 10.31%, 70.67% 10.33%, 72% 10.31%, 73.33% 10.25%, 74.67% 10.15%, 76% 10%, 77.33% 9.82%, 78.67% 9.6%, 80% 9.34%, 81.33% 9.04%, 82.67% 8.72%, 84% 8.37%, 85.33% 7.99%, 86.67% 7.59%, 88% 7.17%, 89.33% 6.73%, 90.67% 6.28%, 92% 5.83%, 93.33% 5.37%, 94.67% 4.91%, 96% 4.45%, 97.33% 4%, 98.67% 3.56%, 100% 3.14%);
+
+}
+#newsletter {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    background-image: url(img/banner/b14.png);
+    background-repeat: no-repeat;
+    background-position: 20% 30%;
+    background-color: #041e42;
+    padding: 30px 30px;
+}
+/*For adding styling for text*/
+#newsletter h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+}
+#newsletter p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #818ea0;
+}
+#newsletter p span {
+    color: #ffbd27;
+}
+/*styling for the box which takes email as input*/
+#newsletter input {
+    height: 3.125rem;
+    width: 100%;
+    padding: 0 1.25em;
+    font-size: 13.2px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    Outline: none;
+    /*for removing the curve on the box on right side of placeholder*/
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+/*For adding different color for button*/
+#newsletter button {
+    background-color: #088178;
+    color : #fff;
+    white-space: nowrap;
+    /*for removing the curve on the box on left side of button*/
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+/*For aligning button and placeholder in a single row*/
+#newsletter .form {
+    display: flex;
+    width: 40%; /*for incresing width of placeholder to it's original size after modification*/
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+/*for displaying the hyperlinks of eachs ection in column wise*/
+footer {
+    font-size: 20px;
+}
+footer .col{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    margin-bottom: 20px;
+    padding: 30px 30px;
+}
+footer .col > * {
+    font-size: 20px;
+
+}
+/*To add a space below cara logo*/
+footer .logo {
+    margin-bottom: 30px;
+    width: 200px;
+    height: 150px;
+}
+/*Styling for all the h4 headings*/
+footer h4 {
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+/*Styling for all paragraphs*/
+footer h4 {
+    font-size: 13px;
+    margin: 0/*top*/ 0/*right*/ 8px/*bottom*/ 0/*left*/;
+}
+/*For anchor tags(links)*/
+footer a {
+    font-size: 13px;
+    text-decoration: none;/*For removing the underlines below links*/
+    color: #222;
+    margin-bottom: 10px;
+}
+/*For adding space above those icons*/
+footer .follow {
+    margin-top: 20px;
+}
+/*For adding colors for icons in About section*/
+footer .follow i{
+    color: #465b52;
+    padding-right: 4px;
+    cursor: pointer; /*Changes mouse cursor to a pointer*/
+}
+/*For adding border for both images*/
+footer .install .row img {
+    border: 1px solid #088178;
+    border-radius: 6px;
+}
+/*For adding space above and below those images in insall column*/
+footer .install img {
+    margin: 10px 0 15px 0;
+}
+/*for hover effect for icons and links*/
+footer .follow i:hover,
+footer a:hover{
+    color: #088178;
+}
+/*for aligning the copyright paragraph to center*/
+footer .copyright {
+    width: 100%;
+    text-align: center;
+}
