@@ -35,7 +35,21 @@ adminApp.post("/login",(req,res)=>{
     })
 
 })
-
+adminApp.get("/dashboard",async (req,res)=>{
+    await volunteerModel.find({verified:false})
+    .then((volunteers)=>{
+        res.send({
+            volunteers:volunteers,
+            success:true,
+        })
+    })
+    .catch((err)=>{
+        res.send({
+            message:err.message,
+            success:false,
+        })
+    })
+})
 adminApp.post("/verify_volunteer",(req,res)=>{
     const {name} = req.body;
 

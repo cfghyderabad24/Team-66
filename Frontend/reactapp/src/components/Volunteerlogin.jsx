@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Make sure to import axios
 
 function Volunteerlogin() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,12 +19,15 @@ function Volunteerlogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/volunteerlogin', formData);
-      console.log('Login successful:', response.data);
-      setFormData({
-        email: '',
-        password: '',
-      });
+      await axios.post('http://localhost:3000/volunteer/login', formData)
+      .then((response)=>{
+        console.log('Login successful:', response.data);
+        setFormData({
+          email: '',
+          password: '',
+        });
+        navigate('/volunteer/home')
+      })
     } catch (error) {
       console.error('Error logging in:', error);
     }

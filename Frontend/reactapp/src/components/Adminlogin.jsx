@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
+import {useNavigate} from 'react-router-dom';
 import './volunterlogin.css';
 
 function Volunteerlogin() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -18,12 +20,17 @@ function Volunteerlogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/enquiry', formData);
-      console.log('Login successful:', response.data);
-      setFormData({
-        email: '',
-        password: '',
-      });
+      await axios.post('http://localhost:3000/admin/login', formData)
+      .then((response)=>{
+        console.log('Login successful:', response.data);
+        if(response.data.success){
+          navigate('/admin/dashboard')
+        }
+        setFormData({
+          username: '',
+          password: '',
+        });
+      })
     } catch (error) {
       console.error('Error logging in:', error);
     }
@@ -35,8 +42,8 @@ function Volunteerlogin() {
       <form onSubmit={handleSubmit}>
         <div>
           <div>
-            <label>Email: </label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Enter your email id' required />
+            <label>username: </label>
+            <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder='Enter your username' required />
           </div>
           <div>
             <label>Password: </label>
