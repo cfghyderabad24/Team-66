@@ -1,9 +1,15 @@
 const express = require("express");
+const {payment}  = require('../Controllers/donorController.js');
+
 const donorApp = express.Router();
 
-import { payment } from '../Controllers/donorController.js';
+const {verifyPayment} = require('../Controllers/donorController.js');
 
+const {certificate} = require('../Controllers/donorController.js');
 
 donorApp.post('/payment',payment);
+donorApp.post('/verify',verifyPayment);
+donorApp.get('/certificate',certificate);
+
 
 module.exports = donorApp;

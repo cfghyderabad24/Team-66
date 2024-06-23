@@ -1,12 +1,12 @@
 const express = require("express");
 const adminApp = express.Router();
 
-const adminmodel = require("../Models/adminModel");
+const adminModel = require("../Models/adminModel");
 const volunteerModel = require("../Models/volunteerModel");
 
 adminApp.post("/login",(req,res)=>{
     const {username, password} = req.body;
-    adminmodel.findOne({username:username})
+    adminModel.findOne({username:username})
     .then((admin)=>{
         if(admin){
           if(admin.password === password){
@@ -35,7 +35,21 @@ adminApp.post("/login",(req,res)=>{
     })
 
 })
-
+adminApp.get("/dashboard",async (req,res)=>{
+    await volunteerModel.find({verified:false})
+    .then((volunteers)=>{
+        res.send({
+            volunteers:volunteers,
+            success:true,
+        })
+    })
+    .catch((err)=>{
+        res.send({
+            message:err.message,
+            success:false,
+        })
+    })
+})
 adminApp.post("/verify_volunteer",(req,res)=>{
     const {name} = req.body;
 
@@ -61,7 +75,31 @@ adminApp.post("/verify_volunteer",(req,res)=>{
     })
 })
 
-
+adminApp.post('/addSTOV',async(req,res)=>{
+    const {sid,vid} = req.body;
+    await volunteerModel.findOne({email:vid})
+    .then((volunteer)=>{
+        if(volunteer){
+            volunteer.studentIds.push(sid);
+            volunteer.save();
+            res.send({
+                message:"Student added to volunteer",
+                success:true,
+            })
+        }else{
+            res.send({
+                message:"Volunteer not found",
+                success:false,
+            })
+        }
+    })
+    .catch((err)=>{
+        res.send({
+            message:err.message,
+            success:false,
+        })
+    })
+})
 
 
 module.exports = adminApp;

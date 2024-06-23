@@ -7,14 +7,25 @@ import Home from './components/Home.jsx'
 import Layout from './layout.jsx'
 import Announcements from './components/Announcements.jsx'
 import Donate from './components/Donate.jsx'
-import Login from './components/login.jsx'
-const router=createBrowserRouter(
+import Volunteerlogin from './components/Volunteerlogin.jsx'
+import Adminlogin from './components/Adminlogin.jsx'
+import Volunteerregister from './components/volunteerregister.jsx'
+import AdminHome from './components/AdminHome.jsx'
+import VolunteerHome from './components/VolunteerHome.jsx'
+import ParentHome from './components/ParentHome.jsx'
+
+const router= createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout/>} >
      <Route path='/' element={<Home/>}/>
      <Route path='/announcements' element={<Announcements/>}/>
      <Route path='/donate' element={<Donate/>}/>
-     <Route path='/login' element={<Login/>}/>
+     <Route path='/volunteerlogin' element={<Volunteerlogin/>}/>
+    <Route path='/volunteer/home/:id' element={<VolunteerHome/>}/>
+     <Route path='/adminlogin' element={<Adminlogin/>}/>
+     <Route path='/admin/dashboard' element={<AdminHome/>}/>
+     <Route path='/volunteerregister' element={<Volunteerregister/>}/>
+     <Route path='/parent/:id/:uuid' element={<ParentHome/>} />
      <Route path="*" element={<div>not found</div>}/>
     </Route>
   )
