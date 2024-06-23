@@ -10,7 +10,8 @@ import appImage from './images/home/app.jpg';
 import playImage from './images/home/play.jpg';
 import payImage from './images/home/pay.png';
 import chart1 from './images/home/chart.jpg';
-import video from "./images/vid.mp4"
+import video from "./images/vid.mp4";
+import Announcements from './Announcements';
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
 
   }
   return (
+    <>
+    <Announcements/>
     <div>
       <section id='home'>
         <a href='#'><img className='bcd' style={{height: "1000px", width: "2000px"}} src={fileImage} alt="" /></a>
@@ -181,6 +184,7 @@ function App() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 
