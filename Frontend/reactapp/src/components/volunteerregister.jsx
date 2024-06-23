@@ -26,7 +26,7 @@ function Volunteerregister() {
       await axios.post('http://localhost:3000/volunteer/register', formData)
       .then((response)=>{
       if(response.data.success) {
-        navigate('/volunteer/home');
+        navigate(`/volunteer/home/${formData.email}`);
       }
       setFormData({
         name: '',
