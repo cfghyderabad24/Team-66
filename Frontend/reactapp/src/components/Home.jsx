@@ -79,8 +79,8 @@ function App() {
         </div>
       </section>
 
-      <section style = {{padding: "70px 0px 20px 20px", background: "#fff2e5", borderRadius: "100px"}}>
-        <video style = {{width: "1200px", height: "700px", display: "flex", justifyContent: "center", textAlign: "center"}} controls autoplay> 
+      <section style = {{padding: "70px 0px 20px 20px", background: "#fff2e5", borderRadius: "100px",boxShadow:'0 5px 15px rgba(0, 0, 0, 0.06)'}}>
+        <video style = {{width: "1200px", height: "700px", display: "flex", justifyContent: "center", textAlign: "center",marginLeft:'100px'}} controls autoplay> 
           <source src = {video} type="video/mp4"></source>
           </video>
       </section>
