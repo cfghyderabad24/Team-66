@@ -2,7 +2,11 @@
 import React, { useEffect,useState } from 'react';
 import axios from 'axios';
 function AdminHome() {
-    const [volunteers, setVolunteers] = useState([{}])
+  const [formData, setFormData] = useState({
+    sid:"",
+    vid:""
+  })
+  const [volunteers, setVolunteers] = useState([])
     useEffect(() => {
         axios.get('http://localhost:3000/admin/dashboard')
         .then((response)=>{
@@ -22,6 +26,24 @@ function AdminHome() {
             }
         })
     }
+    const handleChange = (e) => {
+      setFormData({...formData, [e.target.name]: e.target.value})
+    }
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      console.log('Form data:', formData)
+      axios.post('http://localhost:3000/admin/addSTOV', formData)
+      .then((response)=>{
+          if(response.data.success){
+              alert('Successfully added')
+          }else{
+            console.log(response.data.message)
+          }
+      })
+      .catch((err)=>{
+          console.log(err.message)
+      })
+    }
   return (<>
   <div>
     
@@ -40,6 +62,11 @@ function AdminHome() {
           })
         }
         </div>
+        <form>
+          <input type="text" name="sid" placeholder="Student ID" onChange={handleChange}/>
+          <input type="text" name="vid" placeholder="Volunteer email" onChange={handleChange}/>
+          <button onClick={handleSubmit}>Submit</button>
+        </form>
         </>
   )
 }

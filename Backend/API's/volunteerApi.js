@@ -3,6 +3,12 @@ const volunteerApi = express.Router();
 const studentModel = require("../Models/studentModel.js");
 const volunteerModel = require("../Models/volunteerModel.js");
 const { v4: uuidv4 } = require('uuid');
+const { createCanvas, loadImage, registerFont } = require('canvas');
+const PDFDocument = require('pdfkit');
+const path= require('path');
+const bodyParser = require('body-parser');
+registerFont(path.join(__dirname, 'arial.ttf'), { family: 'Arial' });
+
 
 volunteerApi.post("/register",async (req, res) => {
   const { name, age, profession, mobileNo, email, password } = req.body;
