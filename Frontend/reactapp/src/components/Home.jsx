@@ -12,6 +12,7 @@ import payImage from './images/home/pay.png';
 import chart1 from './images/home/chart.jpg';
 import video from "./images/vid.mp4";
 import Announcements from './Announcements';
+import ChatBot from './ChatBot';
 
 
 function App() {
@@ -182,6 +183,7 @@ function App() {
         <div className="copyright">
           <p>© 2024 Subhiksha. Unauthorized use of website content is prohibited.</p>
         </div>
+        <ChatBot/>
       </footer>
     </div>
     </>
