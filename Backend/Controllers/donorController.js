@@ -1,11 +1,12 @@
 const donorModel = require('../Models/donorModel');
 
-const bodyParser = require('body-parser');
+require('dotenv').config();
 const { createCanvas, loadImage, registerFont } = require('canvas');
 const PDFDocument = require('pdfkit');
-const path = require('path');
-const Stripe = require('stripe');
+const path= require('path');
+const bodyParser = require('body-parser');
 registerFont(path.join(__dirname, 'arial.ttf'), { family: 'Arial' });
+const Stripe = require('stripe');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -14,7 +15,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const payment = async (req,res) => {
 
     const frontend_url = 'http://localhost:5173';
-
+    const n=req.body.name;
     try{
         const newDonor = new donorModel({
             name:req.body.name,
@@ -40,11 +41,11 @@ const payment = async (req,res) => {
     const session = await stripe.checkout.sessions.create({
         line_items:line_items,
         mode:'payment',
-        success_url:`${frontend_url}/verify?success=true&paymentId=${saveDonor._id}`,
-        cancel_url:`${frontend_url}/verify?success=false&paymentId=${saveDonor._id}`,
+        success_url:`${frontend_url}/verify?success=true&paymentId=${saveDonor._id}&name=${n}`,
+        cancel_url:`${frontend_url}/verify?success=false&paymentId=${saveDonor._id}&name=${n}`,
     })
 
-    res.json({success:true,session_url:session.url});
+    res.json({success:true,session_url:session.url,name:n});
     console.log()
     }
     catch(error){
@@ -54,17 +55,19 @@ const payment = async (req,res) => {
 }
 
 
+
+
 const verifyPayment = async (req,res) => {
-    const {paymentId,success} = req.body;
-    try{
-        if(success=="true"){
-            res.json({success:true,message:"Paid"})
+        const {paymentId,success,name} = req.body;
+        try{
+            if(success=="true"){
+                res.json({success:true,message:"Paid",name})
+            }
+            else{
+                await donorModel.findByIdAndDelete(paymentId);
+                res.json({success:false,message:"Payment Failed",name:name})
+            }
         }
-        else{
-            await donorModel.findByIdAndDelete(paymentId);
-            res.json({success:false,message:"Payment Failed"})
-        }
-    }
     catch(error){
         console.log(error);
     }
@@ -75,7 +78,7 @@ const verifyPayment = async (req,res) => {
 
 
 const certificate = async (req, res) => {
-    const name = "Veeresh";
+    const names = req.params.name;
 
     try {
         const canvas = createCanvas(800, 600); // Adjust size as per your template
@@ -95,7 +98,7 @@ const certificate = async (req, res) => {
         const namePosition = { x: 300, y: 300 }; // Adjust based on your template
 
         // Draw the text onto the canvas
-        ctx.fillText(name, namePosition.x, namePosition.y);
+        ctx.fillText(names, namePosition.x, namePosition.y);
 
         // Convert the canvas to a PNG buffer
         const buffer = canvas.toBuffer('image/png');
