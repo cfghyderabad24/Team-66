@@ -1,6 +1,5 @@
 import React from 'react';
 import './home.css';
-import logo from './images/home/logo.webp';
 import fileImage from './images/home/file.jpg';
 import i5 from './images/home/i5.jpg';
 import founderImage from './images/home/founder.webp';
@@ -10,7 +9,9 @@ import success from './images/home/success.png';
 import appImage from './images/home/app.jpg';
 import playImage from './images/home/play.jpg';
 import payImage from './images/home/pay.png';
-import Announcements from './Announcements';
+import chart1 from './images/home/chart.jpg';
+import video from "./images/vid.mp4"
+
 
 function App() {
   const mystyle={
@@ -24,8 +25,6 @@ function App() {
 
   }
   return (
-    <>
-    <Announcements/>
     <div>
       <section id='home'>
         <a href='#'><img className='bcd' style={{height: "1000px", width: "2000px"}} src={fileImage} alt="" /></a>
@@ -80,6 +79,12 @@ function App() {
         </div>
       </section>
 
+      <section style = {{padding: "70px 0px 20px 20px", background: "#fff2e5", borderRadius: "100px"}}>
+        <video style = {{width: "1200px", height: "700px", display: "flex", justifyContent: "center", textAlign: "center"}} controls autoplay> 
+          <source src = {video} type="video/mp4"></source>
+          </video>
+      </section>
+
       <h1 className='head'>Why is our website Unique</h1>
       
       <section id='b1'>
@@ -103,6 +108,17 @@ function App() {
         </div>
       </section>
 
+      <section id='b10'>
+        <div style = {{padding : "70px 70px", display: "flex", flexDirection: "column"}}>
+          <h1 style = {{fontSize : "45px", display: "flex", justifyContent: "center"}}>Data Analysis Regarding Enrolment of Children</h1>
+          <div>
+          <img style = {{width: "600px", height: "500px", display: "flex", justifyContent: "center"}}className='i' src={chart1} alt="" />
+          <h4 style = {{fontSize : "30px", display: "flex", justifyContent: "center"}}>Increasing growth of Student Enrolment</h4>
+          </div>
+        </div>
+      </section>
+
+ 
       <section style = {mystyle} id="newsletter" className="section-p1 section-m1">
         <div style = {{padding: "50px 50px"}} className="newstext">
           <h4>Sign Up for Newsletters</h4>
@@ -165,7 +181,6 @@ function App() {
         </div>
       </footer>
     </div>
-  </>
   );
 }
 
