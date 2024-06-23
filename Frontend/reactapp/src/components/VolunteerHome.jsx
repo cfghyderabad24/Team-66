@@ -124,9 +124,10 @@ function VolunteerHome() {
   };
   return (
     <>
-      <div>VolunteerHome</div>
-      <div>
-        <h1>Welcome {volunteer?.name}</h1>
+      <div style={{ width: '45%', margin: 'auto', padding: '20px', borderRadius: '8px', marginTop: '10px' }}>
+      <div><h1 style={{ color: 'red', fontSize: '2rem', textAlign: 'center' }}> Volunteer Home</h1></div>
+      <div style={{backgroundColor:'whitesmoke',textAlign:'center',justifyContent:'center',padding:'10px'}}>
+        <h1 style={{ color: '', fontSize: '2rem', textAlign: 'center' }} >Welcome Volunteer {volunteer?.name}</h1>
         <h2>Your email: {volunteer?.email}</h2>
         <h2>Your contact: {volunteer?.mobileNo}</h2>
         <h2>Your profession: {volunteer?.profession}</h2>
@@ -136,7 +137,7 @@ function VolunteerHome() {
         {qr === "" ? (
           <form onSubmit={handleSubmit}>
             <div>
-              <h2>Get QR of a student</h2>
+              <h2 style={{ color: 'red', fontSize: '2rem', textAlign: 'center',margin:'10px' }}>Get QR of a student</h2>
               <div>
                 <label>Username: </label>
                 <input
@@ -157,7 +158,7 @@ function VolunteerHome() {
           <QRCode value={`http://localhost:5173/parent/${qr}`} />
         )}
         <div>
-          <h2>Register a student</h2>
+          <h2 style={{ color: 'red', fontSize: '2rem', textAlign: 'center',margin:'10px' }}>Register a student</h2>
           <form onSubmit={handleStudentSubmission}>
             <div>
               <label>Name: </label>
@@ -262,11 +263,11 @@ function VolunteerHome() {
           </form>
         </div>
         <div>
-          <h1>Students under you</h1>
+          <h1 style={{ color: 'red', fontSize: '2rem', textAlign: 'center',margin:'10px' }}>Students under you</h1>
           {volunteer.studentIds &&
             volunteer.studentIds.map((student, index) => (
               <div key={index}>
-                <h3>{student}</h3>
+                <h3 style={{ color: 'black', fontSize: '2rem', textAlign: 'center',margin:'10px' }}>{student}</h3>
                 <form
                   onSubmit={() => {
                     axios
@@ -283,8 +284,8 @@ function VolunteerHome() {
                       });
                   }}
                 >
-                  <input type="text" value={query} onChange={handleQueryChange} />
-                  <button type="submit">add query</button>
+                  <input type="text" value={query} onChange={handleQueryChange} placeholder="Make report on student activity"/>
+                  <button type="submit">add Report</button>
                 </form>
                 <br />
                 <br />
@@ -299,6 +300,7 @@ function VolunteerHome() {
               <iframe src={certificateUrl} width="800" height="600" title="Certificate"></iframe>
             </div>
           )}
+      </div>
       </div>
     </>
   );
