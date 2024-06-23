@@ -11,7 +11,8 @@ parentApp.get('/login/:username/:uuid', async (req, res) => {
     if(st.uuid === uuid) 
     res.send({
         message: "login success",
-        success: true
+        success: true,
+        student: st
     });
     else{
         res.send({

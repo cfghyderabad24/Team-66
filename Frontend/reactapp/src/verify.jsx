@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+const { createCanvas, loadImage, registerFont } = require('canvas');
+const PDFDocument = require('pdfkit');
 import axios from 'axios';
 
 const Verify = () => {
