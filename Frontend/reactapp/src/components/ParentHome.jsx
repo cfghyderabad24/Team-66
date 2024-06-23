@@ -18,10 +18,11 @@ function ParentHome() {
         })
     }, [])
   return (<>
-    <div>
-        <h1>ParentHome</h1>
-        <h2>Student Details</h2>
-        <h3>Name: {studentData.name}</h3>
+    <div style={{ width: '45%', margin: 'auto', padding: '20px', borderRadius: '8px', marginTop: '10px' }}>
+        <h1 style={{ color: 'red', fontSize: '3rem', textAlign: 'center' }}>ParentHome</h1>
+        <h2 style={{ color: 'black', fontSize: '2rem', textAlign: 'center' }}>Student Details</h2>
+        <div style={{backgroundColor:'#f0ffff',padding:'10px'}}>
+        <h3 style={{fontSize: '2rem',margin:'3px' }}>Name: {studentData.name}</h3>
         <div>
             <h3>Age: {studentData.age}</h3>
             <h3>Medical Details:</h3>
@@ -37,9 +38,13 @@ function ParentHome() {
             <h3>Reports:</h3>
             <ul>
                 {studentData?.reports?.map((report, index) => (
+                    <>
+                    <li key={index}>{report.date}</li>
                     <li key={index}>{report.comment}</li>
+                    </>
                 ))}
             </ul>
+        </div>
         </div>
     </div>
 

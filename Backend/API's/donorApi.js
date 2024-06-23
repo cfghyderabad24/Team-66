@@ -9,7 +9,7 @@ const {certificate} = require('../Controllers/donorController.js');
 
 donorApp.post('/payment',payment);
 donorApp.post('/verify',verifyPayment);
-donorApp.get('/certificate',certificate);
+donorApp.get('/certificate/:name',certificate);
 
 
 module.exports = donorApp;

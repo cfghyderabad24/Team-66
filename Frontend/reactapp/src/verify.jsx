@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-const { createCanvas, loadImage, registerFont } = require('canvas');
-const PDFDocument = require('pdfkit');
 import axios from 'axios';
 
 const Verify = () => {
   const [searchParams] = useSearchParams();
   const success = searchParams.get("success");
   const paymentId = searchParams.get("paymentId");
+  const name = searchParams.get("name");
   const navigate = useNavigate();
   const [certificateUrl, setCertificateUrl] = useState('');
   const [loading, setLoading] = useState(true);
 
   const verifyPayment = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/donor/verify', { success, paymentId });
+      const response = await axios.post('http://localhost:3000/donor/verify', { success, paymentId, name });
       if (response.data.success) {
-        await getCertificate();
+        console.log(response);
+        console.log(response.data.name)
+        await getCertificate(response.data.name);
       } else {
         navigate('http://localhost:3000/donor/verify');
       }
@@ -28,11 +29,11 @@ const Verify = () => {
     }
   };
 
-  const getCertificate = async () => {
+  const getCertificate = async (n) => {
     try {
-      const response = await axios.get('http://localhost:3000/donor/certificate', {
+      const response = await axios.get(`http://localhost:3000/donor/certificate/${n}`, {
         responseType: 'blob'
-      });
+      },);
       const url = URL.createObjectURL(response.data);
       setCertificateUrl(url);
     } catch (error) {

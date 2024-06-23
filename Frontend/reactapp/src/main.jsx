@@ -13,12 +13,16 @@ import Volunteerregister from './components/volunteerregister.jsx'
 import AdminHome from './components/AdminHome.jsx'
 import VolunteerHome from './components/VolunteerHome.jsx'
 import ParentHome from './components/ParentHome.jsx'
+import Verify from './verify.jsx'
+import AnnouncementHome from './components/AnnouncementHome.jsx';
+
 
 const router= createBrowserRouter(
   createRoutesFromElements(
+
     <Route path="/" element={<Layout/>} >
      <Route path='/' element={<Home/>}/>
-     <Route path='/announcements' element={<Announcements/>}/>
+     <Route path='/announcements' element={<AnnouncementHome/>}/>
      <Route path='/donate' element={<Donate/>}/>
      <Route path='/volunteerlogin' element={<Volunteerlogin/>}/>
     <Route path='/volunteer/home/:id' element={<VolunteerHome/>}/>
@@ -27,6 +31,7 @@ const router= createBrowserRouter(
      <Route path='/volunteerregister' element={<Volunteerregister/>}/>
      <Route path='/parent/:id/:uuid' element={<ParentHome/>} />
      <Route path="*" element={<div>not found</div>}/>
+    <Route path='/verify' element={<Verify/>}/>
     </Route>
   )
 )
