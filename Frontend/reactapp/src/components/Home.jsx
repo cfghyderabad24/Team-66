@@ -10,6 +10,7 @@ import success from './images/home/success.png';
 import appImage from './images/home/app.jpg';
 import playImage from './images/home/play.jpg';
 import payImage from './images/home/pay.png';
+import Announcements from './Announcements';
 
 function App() {
   const mystyle={
@@ -23,6 +24,8 @@ function App() {
 
   }
   return (
+    <>
+    <Announcements/>
     <div>
       <section id='home'>
         <a href='#'><img className='bcd' style={{height: "1000px", width: "2000px"}} src={fileImage} alt="" /></a>
@@ -162,6 +165,7 @@ function App() {
         </div>
       </footer>
     </div>
+  </>
   );
 }
 
